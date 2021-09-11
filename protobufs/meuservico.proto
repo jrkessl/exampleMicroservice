@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+message Requisicao { // uma requisicao simples que soh passa um inteiro. 
+    int32 id = 1;
+}
+
+message Resposta { // uma resposta simples que so passa uma string.
+    string texto = 1;
+}
+
+message Resposta2 { // uma resposta com um inteiro e uma string. 
+    string texto = 1;
+    int32 num = 2;
+}
+
+service Meuservico {
+    rpc chamada1 (Requisicao) returns (Resposta); // apenas uma chamada que aceita Requisicao e devolve Resposta
+    rpc chamada2 (Requisicao) returns (Resposta2); // semelhante ao item anterior
+    rpc ehPrimo (Requisicao) returns (Resposta); 
+}
+
