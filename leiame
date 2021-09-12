@@ -5,11 +5,15 @@ Instrucoes de como fazer funcionar esse projeto.
 Artigo de origem: 
 https://realpython.com/python-microservices-grpc/#example-implementation
 
+********************* instrução 1/2: como fazer funcionar do zero **********************
+
 1. criar arquivo /protobufs/<nome do servico>.proto // Define a API do serviço.
 2. criar arquivo <nome do servico>/requirements.txt 
 3. criar, ativar e configurar o ambiente virtual: 
 python3 -m venv venv0
 source venv0/bin/activate  
+    (o comando acima é na pasta do projeto)
+cd <nome do servico>
 python -m pip install -r requirements.txt
 
 4. gerar o código python:
@@ -18,3 +22,15 @@ python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. .
 5. criar o arquivo cliente cliente.py
 6. criar o arquivo servidor <nome do servico>.py
 7. rodar o servidor: python3 <nome do servico>.py (lembrar de estar com o ambiente virtual ativado) e, em outra janela, rodar o cliente.
+
+********************* instrução 2/2: como fazer funcionar o projeto baixado do github *******************
+
+1. baixar o projeto (com git clone)
+2. cd exampleMicroservice
+3. python3 -m venv venv0
+4. source venv0/bin/activate  
+5. cd meuservico
+6. python -m pip install -r requirements.txt
+7. rodar o servidor: python3 meuservico.py
+8. voltar à pasta raiz do projeto (exampleMicroservices) e repetir a partir step 4 e 5 pra rodar o cliente
+9. rodar o cliente: python3 cliente.py 
