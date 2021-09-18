@@ -5,7 +5,7 @@ from meuservico_pb2_grpc import MeuservicoStub
 
 
 
-channel = grpc.insecure_channel("localhost:50051")
+channel = grpc.insecure_channel("localhost:50052")
 client = MeuservicoStub(channel)
 
 req = Requisicao(
