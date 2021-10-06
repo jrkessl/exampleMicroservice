@@ -12,10 +12,14 @@ from meuservico_pb2_grpc import MeuservicoStub
 app = Flask(__name__)
 
 # cria outro channel & stub
-server_host2 = os.getenv("what do this do?22", "localhost")
-channel2 = grpc.insecure_channel(
-    f"{server_host2}:50052"
-)
+#server_host2 = os.getenv("what do this do?22", "localhost")
+#channel2 = grpc.insecure_channel( f"{server_host2}:50052" )
+
+server_host2 = os.getenv("VAR_MEUSERVICO_HOST", "localhost") # recebe na hora de executar o docker a variavel VAR_MEUSERVICO_HOST.
+                                                             # Reverte para localhost se não encontrar.
+channel2 = grpc.insecure_channel( f"{server_host2}:50051" ) # cria um channel que vai conectar no host do meuservico
+
+
 client2 = MeuservicoStub(channel2)
 
 

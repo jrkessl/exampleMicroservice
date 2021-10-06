@@ -48,7 +48,7 @@ def serve():
     meuservico_pb2_grpc.add_MeuservicoServicer_to_server(
         MeuservicoService(), server
     )
-    server.add_insecure_port("[::]:50052")
+    server.add_insecure_port("[::]:50051")
     server.start()
     server.wait_for_termination()
 
