@@ -16,13 +16,13 @@ Instrucoes de como fazer funcionar esse projeto.
 Artigo de origem: 
 https://realpython.com/python-microservices-grpc/#example-implementation
 
-****************************************************************************************
-****************************************************************************************
-***** (primeiro commit) Instrucao para o microservico "meuservico" *********************
-****************************************************************************************
-****************************************************************************************
+'****************************************************************************************
+'****************************************************************************************
+'***** (primeiro commit) Instrucao para o microservico "meuservico" *********************
+'****************************************************************************************
+'****************************************************************************************
 
-********************* instrução 1/2: como fazer funcionar do zero **********************
+'********************* instrução 1/2: como fazer funcionar do zero **********************
 
 1. criar arquivo /protobufs/<nome do servico>.proto // Define a API do serviço.
 2. criar arquivo <nome do servico>/requirements.txt 
@@ -40,7 +40,7 @@ python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. .
 6. criar o arquivo servidor <nome do servico>.py
 7. rodar o servidor: python3 <nome do servico>.py (lembrar de estar com o ambiente virtual ativado) e, em outra janela, rodar o cliente.
 
-********************* instrução 2/2: como fazer funcionar o projeto baixado do github *******************
+'********************* instrução 2/2: como fazer funcionar o projeto baixado do github *******************
 
 1. baixar o projeto (com git clone)
 2. cd exampleMicroservice
@@ -52,13 +52,13 @@ python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. .
 8. voltar à pasta raiz do projeto (exampleMicroservices) e repetir a partir step 4 e 5 pra rodar o cliente
 9. rodar o cliente: python3 cliente.py 
 
-****************************************************************************************
-****************************************************************************************
-****** (segundo commit) Instrucao para a pagina web com Flask **************************
-****************************************************************************************
-****************************************************************************************
+'****************************************************************************************
+'****************************************************************************************
+'****** (segundo commit) Instrucao para a pagina web com Flask **************************
+'****************************************************************************************
+'****************************************************************************************
 
-********************* instrução 1/2: como fazer funcionar do zero **********************
+'********************* instrução 1/2: como fazer funcionar do zero **********************
 
 0. fazer git clone deste commit:
 https://devopscube.com/checkout-clone-specific-git-commit-id-sha/
@@ -88,7 +88,7 @@ https://devopscube.com/checkout-clone-specific-git-commit-id-sha/
 11. Vai dar pau pois neste commit em particular o meuservico está ouvindo na porta 50051 mas o servidorweb está buscando na porta 50052. Corrija 
     isso na linha 17 do arquivo servidorweb.py e linha 51 do meuservico.py: de 50052 para 50051.
 
-********************* instrução 2/2: como fazer funcionar o projeto baixado do github *******************
+'********************* instrução 2/2: como fazer funcionar o projeto baixado do github *******************
 
 1. git clone https://github.com/jrkessl/exampleMicroservice
 2. cd exampleMicroservice
@@ -110,13 +110,13 @@ https://devopscube.com/checkout-clone-specific-git-commit-id-sha/
 7. testar o servidor web. Em outro terminal: $ curl http://127.0.0.1:5000
  
 
-****************************************************************************************
-****************************************************************************************
-****** (terceiro commit) Instrucao para dockerizar os serviços *************************
-****************************************************************************************
-****************************************************************************************
+'****************************************************************************************
+'****************************************************************************************
+'****** (terceiro commit) Instrucao para dockerizar os serviços *************************
+'****************************************************************************************
+'****************************************************************************************
 
-********************* instrução 1/2: como fazer funcionar do zero **********************
+'********************* instrução 1/2: como fazer funcionar do zero **********************
 
 Preparação
 1. corrigir a porta usada pelo meuservico para parar de dar confusão. Substituir a porta 50052 por 50051 em:
@@ -152,7 +152,7 @@ Fazer o Docker do servidorweb
     obs. Sem especificar a network nem passar a variável, seria: $ docker run -p 127.0.0.1:5000:5000/tcp servidorweb
 
 
-********************* instrução 2/2: como fazer funcionar do projeto baixado do github **********************
+'********************* instrução 2/2: como fazer funcionar do projeto baixado do github **********************
 
 Preparação:
 1. baixar o último commit (o commit entitulado: "Adicionando Docker: adicionando instruções de como dockerizar os micr...")
@@ -172,3 +172,28 @@ Preparar e lançar o container do servidorweb
 1. docker build . -f servidorweb/Dockerfile -t servidorweb
 2. docker run -p 127.0.0.1:5000:5000/tcp --network microservices -e VAR_MEUSERVICO_HOST=meuservicoDns servidorweb
     obs. Sem especificar a network nem passar a variável, seria: $ docker run -p 127.0.0.1:5000:5000/tcp servidorweb
+
+# Commit Bonus: microservico extra "meucliente" 
+
+Este microserviço extra apenas roda em loop e conecta no "meuservico" para testar conectividade.
+
+##### instrução: como fazer funcionar (seja criando do zero, seja baixando do github) 
+
+Preparação
+ -apt-get update, upgrade
+ -git clone https://github.com/jrkessl/exampleMicroservice
+ -instalar docker
+ -configurar docker pra rodar sem sudo
+ -nano $HOME/.nanorc
+ -executar os steps pra dar build e run no microserviço "meuserviço":
+  $ docker network create microservices
+  $ docker build . -f meuservico/Dockerfile -t meuservico
+  $ docker run -p 127.0.0.1:50051:50051/tcp --network microservices --name meuservicoDns meuservico &
+1.criar arquivo de execução: meucliente/meucliente.py
+2.criar arquivo Dockerfile
+3.criar arquivo requirements.txt
+4.build: $ docker build . -f meucliente/Dockerfile -t meucliente
+5.rodar o container: $ docker run --network microservices -e VAR_MEUSERVICO_HOST=meuservicoDns meucliente
+	onde: --network microservices > identificar a network
+	      -e VAR_MEUSERVICO_HOST=meuservicoDns > passar o endereço do outro microserviço onde vamos conectar
+	      meucliente > nome da imagem que vamos rodar, eu acho
