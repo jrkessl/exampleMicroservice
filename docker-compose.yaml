@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+
+    servidorweb:
+        build:
+            context: .
+            dockerfile: servidorweb/Dockerfile
+        environment:
+            VAR_MEUSERVICO_HOST: meuservicoDns
+        image: servidorweb
+        networks:
+            - microservices
+        ports:
+            - 5000:5000
+
+    meuservicoDns:
+        build:
+            context: .
+            dockerfile: meuservico/Dockerfile
+        image: meuservico
+        networks:
+            - microservices
+
+networks:
+    microservices:

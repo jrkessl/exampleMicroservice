@@ -197,3 +197,11 @@ Preparação
 	onde: --network microservices > identificar a network
 	      -e VAR_MEUSERVICO_HOST=meuservicoDns > passar o endereço do outro microserviço onde vamos conectar
 	      meucliente > nome da imagem que vamos rodar, eu acho
+
+# Commit: adicionando docker compose
+
+Só adicionando o arquivo e a instrução de como executá-lo.
+ -novo arquivo: docker-compose.yaml
+Instruções de uso:
+ $ docker-compose up       [só pra subir tudo, sem recriar imagens]
+ $ docker-compose build    [pra criar ou recriar as imagens]
