@@ -205,3 +205,19 @@ Só adicionando o arquivo e a instrução de como executá-lo.
 Instruções de uso:
  $ docker-compose up       [só pra subir tudo, sem recriar imagens]
  $ docker-compose build    [pra criar ou recriar as imagens]
+
+# Commit: bootstrapping e cloud-init
+
+Este commit adiciona:
+ ./cloud_init.yaml > script de bootstrapping com instruções de uso. 
+
+# Commit: testando um microserviço por dentro
+
+Este commit adiciona:
+ ./meuservico/autoteste.py > arquivo que testa o microserviço
+
+Instruções:
+ $ docker-compose up                                                   [só pra subir tudo]
+ $ docker exec -it examplemicroservice_meuservicoDns_1  /bin/bash      [entrar no container]
+ $ python3 autoteste.py                                                [testar o container de dentro]
+ $ cat log.txt                                                         [ver o resultado do teste]
