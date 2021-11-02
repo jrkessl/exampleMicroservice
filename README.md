@@ -209,19 +209,28 @@ Instruções:
  $ python3 autoteste.py                                                [testar o container de dentro]
  $ cat log.txt                                                         [ver o resultado do teste]
 
-# Commit: adicionando pytest para testar microservico meuservico dentro do container
+# Commit: adicionando pytest para testar microservicos dentro dos seus containeres
 
+Como funciona:
+ - Foi adicionado um arquivo de teste dentro de cada container; 
+ - Aplica-se o comando "pytest" no container e o pytest se encarrega de descobrir o arquivo de teste, 
+   a função de teste, executá-la e jogar o resultado no standard output.  
+
+Testando o microserviço "meuservico": 
 Este commit adiciona/altera:
  ./meuservico/requirements.txt > adicionado o requerimento de pytest, última versão
- ./meuservico/test_meuservico.py > arquivo com testes na sintaxe do pytest; autoteste.py agora obsoleto.
+ ./meuservico/test_meuservico.py > arquivo com testes na sintaxe do pytest (autoteste.py presente na pasta, mas obsoleto)
+ ./servidorweb/requirements.txt > removida a especificação de versão do pytest, para usar a última versão.
+ ./servidorweb/test_servidorweb.py > código do autoteste desse microserviço
 
 Instruções:
 - para rodar este teste/para rodar um comando no container (sem entrar nele):
  $ docker exec examplemicroservice_meuservicoDns_1 pytest
+ $ docker exec examplemicroservice_servidorweb_1   pytest
  $ docker exec <nome do container>                 <comando>
 
 - para entrar no container e então rodar qualquer coisa: 
  $ docker exec -it examplemicroservice_meuservicoDns_1  /bin/bash
+ $ docker exec -it examplemicroservice_servidorweb_1    /bin/bash
  $ docker exec -it <nome do container>                  /bin/bash
  
-
