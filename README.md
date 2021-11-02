@@ -16,11 +16,7 @@ Instrucoes de como fazer funcionar esse projeto.
 Artigo de origem: 
 https://realpython.com/python-microservices-grpc/#example-implementation
 
-'****************************************************************************************
-'****************************************************************************************
-'***** (primeiro commit) Instrucao para o microservico "meuservico" *********************
-'****************************************************************************************
-'****************************************************************************************
+# Commit: (primeiro commit) Instrucao para o microservico "meuservico"
 
 '********************* instrução 1/2: como fazer funcionar do zero **********************
 
@@ -52,11 +48,7 @@ python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. .
 8. voltar à pasta raiz do projeto (exampleMicroservices) e repetir a partir step 4 e 5 pra rodar o cliente
 9. rodar o cliente: python3 cliente.py 
 
-'****************************************************************************************
-'****************************************************************************************
-'****** (segundo commit) Instrucao para a pagina web com Flask **************************
-'****************************************************************************************
-'****************************************************************************************
+# Commit: (segundo commit) Instrucao para a pagina web com Flask 
 
 '********************* instrução 1/2: como fazer funcionar do zero **********************
 
@@ -109,12 +101,7 @@ https://devopscube.com/checkout-clone-specific-git-commit-id-sha/
  $ FLASK_APP=servidorweb.py flask run
 7. testar o servidor web. Em outro terminal: $ curl http://127.0.0.1:5000
  
-
-'****************************************************************************************
-'****************************************************************************************
-'****** (terceiro commit) Instrucao para dockerizar os serviços *************************
-'****************************************************************************************
-'****************************************************************************************
+# Commit: (terceiro commit) Instrucao para dockerizar os serviços 
 
 '********************* instrução 1/2: como fazer funcionar do zero **********************
 
@@ -221,3 +208,20 @@ Instruções:
  $ docker exec -it examplemicroservice_meuservicoDns_1  /bin/bash      [entrar no container]
  $ python3 autoteste.py                                                [testar o container de dentro]
  $ cat log.txt                                                         [ver o resultado do teste]
+
+# Commit: adicionando pytest para testar microservico meuservico dentro do container
+
+Este commit adiciona/altera:
+ ./meuservico/requirements.txt > adicionado o requerimento de pytest, última versão
+ ./meuservico/test_meuservico.py > arquivo com testes na sintaxe do pytest; autoteste.py agora obsoleto.
+
+Instruções:
+- para rodar este teste/para rodar um comando no container (sem entrar nele):
+ $ docker exec examplemicroservice_meuservicoDns_1 pytest
+ $ docker exec <nome do container>                 <comando>
+
+- para entrar no container e então rodar qualquer coisa: 
+ $ docker exec -it examplemicroservice_meuservicoDns_1  /bin/bash
+ $ docker exec -it <nome do container>                  /bin/bash
+ 
+
