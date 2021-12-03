@@ -234,3 +234,33 @@ Instruções:
  $ docker exec -it examplemicroservice_servidorweb_1    /bin/bash
  $ docker exec -it <nome do container>                  /bin/bash
  
+# Commit: adicionando comandos de upload das imagens Docker para o AWS ECR 
+02/12/2021
+
+Steps para upload no ECR (via AWS CLI):
+ - build the image, e conferir que foi criada (e rodar pra testar, se for o caso):
+ $ docker-compose build
+ $ docker build . -f meucliente/Dockerfile -t meucliente
+ $ docker images
+
+ - instalar e configurar aws cli
+ - autenticar no registry
+ $ aws ecr get-login-password --region <REGIAO> | docker login --username AWS --password-stdin <NO. DA CONTA>.dkr.ecr.<REGIAO>.amazonaws.com
+exemplo:
+ $ aws ecr get-login-password --region sa-east-1 | docker login --username AWS --password-stdin 465271007900.dkr.ecr.sa-east-1.amazonaws.com
+
+ - dar tag na imagem
+ $ docker tag <NOME DA IMAGEM>:latest <NO. DA CONTA>.dkr.ecr.<REGIAO>.amazonaws.com/<NOME DA IMAGEM>:latest
+ $ docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+exemplo:
+ $ docker tag servidorweb:latest 465271007900.dkr.ecr.sa-east-1.amazonaws.com/servidorweb:latest
+ $ docker tag meuservico:latest  465271007900.dkr.ecr.sa-east-1.amazonaws.com/meuservico:latest
+ $ docker tag meucliente:latest  465271007900.dkr.ecr.sa-east-1.amazonaws.com/meucliente:latest
+- fazer push na imagem
+ $ docker push <NO. DA CONTA>.dkr.ecr.<REGIAO>.amazonaws.com/<NOME DA IMAGEM>:latest
+exemplo:
+ $ docker push 465271007900.dkr.ecr.sa-east-1.amazonaws.com/servidorweb:latest
+ $ docker push 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meucliente:latest
+ $ docker push 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meuservico:latest
+
+
