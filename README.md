@@ -234,7 +234,7 @@ Instruções:
  $ docker exec -it examplemicroservice_servidorweb_1    /bin/bash
  $ docker exec -it <nome do container>                  /bin/bash
  
-# Commit: adicionando comandos de upload das imagens Docker para o AWS ECR 
+# Commit: adicionando comandos de upload (push) das imagens Docker para o AWS ECR, usando AWS CLI
 02/12/2021
 
 Steps para upload no ECR (via AWS CLI):
@@ -263,4 +263,23 @@ exemplo:
  $ docker push 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meucliente:latest
  $ docker push 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meuservico:latest
 
+# Commit: adicionando comandos de download (pull) de imagens Docker do AWS ECR, usando AWS CLI
+04/12/2021
 
+Steps:
+1. Instalar aws cli
+2. fazer aws configure
+
+3. Fazer docker login
+ - aws ecr get-login-password --region <REGIAO> | docker login --username AWS --password-stdin <NO. DA CONTA>.dkr.ecr.<REGIAO>.amazonaws.com
+ - aws ecr get-login-password --region sa-east-1 | docker login --username AWS --password-stdin 465271007900.dkr.ecr.sa-east-1.amazonaws.com
+
+4. Pull
+ - docker pull <NO. DA CONTA>.dkr.ecr.<REGIAO>.amazonaws.com/<NOME DA IMAGEM>:<TAG DA IMAGEM>
+ - docker pull 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meuservico:latest
+ - docker pull 465271007900.dkr.ecr.sa-east-1.amazonaws.com/servidorweb:latest
+ - docker pull 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meucliente:latest
+
+5. Rodar
+ - docker run -p 127.0.0.1:5000:5000/tcp --network microservices -e VAR_MEUSERVICO_HOST=meuservicoDns 465271007900.dkr.ecr.sa-east-1.amazonaws.com/servidorweb
+ - docker run -p 127.0.0.1:50051:50051/tcp --network microservices --name meuservicoDns 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meuservico
