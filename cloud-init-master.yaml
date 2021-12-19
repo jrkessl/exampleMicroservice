@@ -63,6 +63,20 @@ runcmd:
  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
  - sudo dpkg -i google-chrome-stable_current_amd64.deb
  
+ - [ sh, -c, echo "=========testando instalacoes=========" ] 
+
+ - [ sh, -c, echo "aws cli:" ] 
+ - [ sh, -c, aws --version ] 
+ - [ sh, -c, echo "docker:" ] 
+ - [ sh, -c, docker --version ] 
+ - [ sh, -c, echo "docker-compose:" ] 
+ - [ sh, -c, docker-compose --version ] 
+ - [ sh, -c, echo "exampleMicroservice:" ] 
+ - [ sh, -c, ls -la /home/ubuntu | grep example ] 
+ - [ sh, -c, echo "docker mastery:" ] 
+ - [ sh, -c, ls -la /home/ubuntu | grep udemy-docker-mastery ] 
+# - [ sh, -c, comando ] 
+
 final_message: "The system is finally up, after $UPTIME seconds"
 
 
