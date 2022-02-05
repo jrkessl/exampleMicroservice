@@ -14,10 +14,15 @@ packages:
   - python3-pip
 
 runcmd:
- - [ sh, -c, echo "=========git clone=========" ]
+ - [ sh, -c, echo "=========git clone jrkessl/exampleMicroservice=========" ]
  - git -C /home/ubuntu clone https://github.com/jrkessl/exampleMicroservice
  - chown ubuntu:ubuntu -R /home/ubuntu/exampleMicroservice
  - chmod 744 -R /home/ubuntu/exampleMicroservice
+ 
+ - [ sh, -c, echo "=========git clone BretFisher/udemy-docker-mastery=========" ]
+ - git -C /home/ubuntu clone https://github.com/BretFisher/udemy-docker-mastery 
+ - chown ubuntu:ubuntu -R /home/ubuntu/udemy-docker-mastery
+ - chmod 744 -R /home/ubuntu/udemy-docker-mastery
 
  - [ sh, -c, echo "=========nano $HOME/.nanorc=========" ]
  - echo "set linenumbers" > /home/ubuntu/.nanorc
@@ -31,50 +36,52 @@ runcmd:
  - pip install docker-compose
  - export PATH="/home/ubuntu/.local/bin:$PATH"
  
- - [ sh, -c, echo "=========instalar aws cli v2=========" ] 
- - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"  
- - sudo apt install unzip
- - unzip awscliv2.zip
- - sudo ./aws/install
+# - [ sh, -c, echo "=========instalar aws cli v2=========" ] 
+# - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"  
+# - sudo apt install unzip
+# - unzip awscliv2.zip
+# - sudo ./aws/install
 
 
 # daqui pra frente são os comandos úteis para instalar e fazer funcionar interface gráfica, 
 # navegador e minikube.
 
 
- - [ sh, -c, echo "=========instalar x2go=========" ] 
- - sudo apt-add-repository ppa:x2go/stable
- - sudo apt-get update
- - sudo apt-get install x2goserver x2goserver-xsession -y > /tmp/x2go_server_install_log.txt
+ # - [ sh, -c, echo "=========instalar x2go=========" ] 
+ # - sudo apt-add-repository ppa:x2go/stable
+ # - sudo apt-get update
+ # - sudo apt-get install x2goserver x2goserver-xsession -y > /tmp/x2go_server_install_log.txt
  
- - [ sh, -c, echo "=========instalar mate=========" ] 
- - sudo apt install mate-desktop-environment -y > /tmp/mate_install_log.txt
+ # - [ sh, -c, echo "=========instalar mate=========" ] 
+ # - sudo apt install mate-desktop-environment -y > /tmp/mate_install_log.txt
 
- - [ sh, -c, echo "=========habilitar login com senha (usuário ubuntu)=========" ] 
- - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
- - sudo service sshd restart
- - [ sh, -c, echo "===obs. falta definir senha do usuario ubuntu===" ] 
+ # - [ sh, -c, echo "=========habilitar login com senha (usuário ubuntu)=========" ] 
+ # - sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+ # - sudo service sshd restart
+ # - [ sh, -c, echo "===obs. falta definir senha do usuario ubuntu===" ] 
 
- - [ sh, -c, echo "=========instalar minikube=========" ] 
- - curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
- - sudo dpkg -i minikube_latest_amd64.deb
+ # - [ sh, -c, echo "=========instalar minikube=========" ] 
+ # - curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+ # - sudo dpkg -i minikube_latest_amd64.deb
  
- - [ sh, -c, echo "=========instalar Chrome=========" ] 
- - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
- - sudo dpkg -i google-chrome-stable_current_amd64.deb
+ # - [ sh, -c, echo "=========instalar Chrome=========" ] 
+ # - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
+ # - sudo dpkg -i google-chrome-stable_current_amd64.deb
  
  - [ sh, -c, echo "=========testando instalacoes=========" ] 
 
- - [ sh, -c, echo "aws cli:" ] 
- - [ sh, -c, aws --version ] 
+# - [ sh, -c, echo "aws cli:" ] 
+# - [ sh, -c, aws --version ] 
  - [ sh, -c, echo "docker:" ] 
  - [ sh, -c, docker --version ] 
  - [ sh, -c, echo "docker-compose:" ] 
  - [ sh, -c, docker-compose --version ] 
- - [ sh, -c, echo "exampleMicroservice:" ] 
- - [ sh, -c, ls -la /home/ubuntu | grep example ] 
- - [ sh, -c, echo "space on disk:" ] 
- - [ sh, -c, df -h / ]  
+ - [ sh, -c, echo "bytes at exampleMicroservice:" ] 
+ - [ sh, -c, find /home/ubuntu/exampleMicroservice | wc -c ] 
+ - [ sh, -c, echo "bytes at udemy-docker-mastery:" ] 
+ - [ sh, -c, find /home/ubuntu/udemy-docker-mastery | wc -c ] 
+ - [ sh, -c, echo "space on root folder:" ] 
+ - [ sh, -c, df -h / ] 
 # - [ sh, -c, comando ] 
 
 final_message: "The system is finally up, after $UPTIME seconds"
@@ -89,5 +96,7 @@ final_message: "The system is finally up, after $UPTIME seconds"
 # /run/cloud-init: contains logs about how cloud-init decided to enable or disable itself, as well as what platforms/datasources were detected. These logs are most useful when trying to determine what cloud-init ran or did not run.
 
 #como lançar a instância com bootstrapping:
-#multipass launch --name a1 --cloud-init ./cloud_init.yaml
-#multipass launch --name ipis --cloud-init ./cloud_init2.yaml --cpus 4 --mem 4G --disk 20G -v
+#multipass launch --name um --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
+#multipass launch --name dois --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
+#multipass launch --name tres --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
+
