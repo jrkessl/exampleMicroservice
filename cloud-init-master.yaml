@@ -73,8 +73,8 @@ runcmd:
  - [ sh, -c, docker-compose --version ] 
  - [ sh, -c, echo "exampleMicroservice:" ] 
  - [ sh, -c, ls -la /home/ubuntu | grep example ] 
- - [ sh, -c, echo "docker mastery:" ] 
- - [ sh, -c, ls -la /home/ubuntu | grep udemy-docker-mastery ] 
+ - [ sh, -c, echo "space on disk:" ] 
+ - [ sh, -c, df -h / ]  
 # - [ sh, -c, comando ] 
 
 final_message: "The system is finally up, after $UPTIME seconds"
