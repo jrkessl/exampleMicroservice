@@ -14,15 +14,15 @@ packages:
   - python3-pip
 
 runcmd:
- - [ sh, -c, echo "=========git clone jrkessl/exampleMicroservice=========" ]
- - git -C /home/ubuntu clone https://github.com/jrkessl/exampleMicroservice
- - chown ubuntu:ubuntu -R /home/ubuntu/exampleMicroservice
- - chmod 744 -R /home/ubuntu/exampleMicroservice
+ # - [ sh, -c, echo "=========git clone jrkessl/exampleMicroservice=========" ]
+ # - git -C /home/ubuntu clone https://github.com/jrkessl/exampleMicroservice
+ # - chown ubuntu:ubuntu -R /home/ubuntu/exampleMicroservice
+ # - chmod 744 -R /home/ubuntu/exampleMicroservice
  
- - [ sh, -c, echo "=========git clone BretFisher/udemy-docker-mastery=========" ]
- - git -C /home/ubuntu clone https://github.com/BretFisher/udemy-docker-mastery 
- - chown ubuntu:ubuntu -R /home/ubuntu/udemy-docker-mastery
- - chmod 744 -R /home/ubuntu/udemy-docker-mastery
+ # - [ sh, -c, echo "=========git clone BretFisher/udemy-docker-mastery=========" ]
+ # - git -C /home/ubuntu clone https://github.com/BretFisher/udemy-docker-mastery 
+ # - chown ubuntu:ubuntu -R /home/ubuntu/udemy-docker-mastery
+ # - chmod 744 -R /home/ubuntu/udemy-docker-mastery
 
  - [ sh, -c, echo "=========nano $HOME/.nanorc=========" ]
  - echo "set linenumbers" > /home/ubuntu/.nanorc
@@ -42,6 +42,10 @@ runcmd:
 # - unzip awscliv2.zip
 # - sudo ./aws/install
 
+ - [ sh, -c, echo "=========instalar microk8s (version 1.17)=========" ] 
+ - sudo snap install microk8s --channel=1.17/stable --classic
+ - sudo usermod -a -G microk8s ubuntu
+ - microk8s enable dashboard dns registry istio
 
 # daqui pra frente são os comandos úteis para instalar e fazer funcionar interface gráfica, 
 # navegador e minikube.
@@ -76,13 +80,16 @@ runcmd:
  - [ sh, -c, docker --version ] 
  - [ sh, -c, echo "docker-compose:" ] 
  - [ sh, -c, docker-compose --version ] 
- - [ sh, -c, echo "bytes at exampleMicroservice:" ] 
- - [ sh, -c, find /home/ubuntu/exampleMicroservice | wc -c ] 
- - [ sh, -c, echo "bytes at udemy-docker-mastery:" ] 
- - [ sh, -c, find /home/ubuntu/udemy-docker-mastery | wc -c ] 
+ # - [ sh, -c, echo "bytes at exampleMicroservice:" ] 
+ # - [ sh, -c, find /home/ubuntu/exampleMicroservice | wc -c ] 
+ # - [ sh, -c, echo "bytes at udemy-docker-mastery:" ] 
+ # - [ sh, -c, find /home/ubuntu/udemy-docker-mastery | wc -c ] 
  - [ sh, -c, echo "space on root folder:" ] 
  - [ sh, -c, df -h / ] 
+ - [ sh, -c, echo "testing microk8s:" ] 
+ - [ sh, -c, microk8s.kubectl version ] 
 # - [ sh, -c, comando ] 
+
 
 final_message: "The system is finally up, after $UPTIME seconds"
 
@@ -96,7 +103,7 @@ final_message: "The system is finally up, after $UPTIME seconds"
 # /run/cloud-init: contains logs about how cloud-init decided to enable or disable itself, as well as what platforms/datasources were detected. These logs are most useful when trying to determine what cloud-init ran or did not run.
 
 #como lançar a instância com bootstrapping:
-#multipass launch --name um --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
-#multipass launch --name dois --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
-#multipass launch --name tres --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
+#multipass launch --name w1   --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
+#multipass launch --name w2 --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
+#multipass launch --name w4 --cloud-init ./cloud-init-docker.yml --cpus 4 --mem 4G --disk 10G
 
