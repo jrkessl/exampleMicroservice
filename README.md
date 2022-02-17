@@ -167,48 +167,48 @@ Este microserviço extra apenas roda em loop e conecta no "meuservico" para test
 ##### instrução: como fazer funcionar (seja criando do zero, seja baixando do github) 
 
 Preparação
- -apt-get update, upgrade
- -git clone https://github.com/jrkessl/exampleMicroservice
- -instalar docker
- -configurar docker pra rodar sem sudo
- -nano $HOME/.nanorc
- -executar os steps pra dar build e run no microserviço "meuserviço":
-  $ docker network create microservices
-  $ docker build . -f meuservico/Dockerfile -t meuservico
-  $ docker run -p 127.0.0.1:50051:50051/tcp --network microservices --name meuservicoDns meuservico &
-1.criar arquivo de execução: meucliente/meucliente.py
-2.criar arquivo Dockerfile
-3.criar arquivo requirements.txt
-4.build: $ docker build . -f meucliente/Dockerfile -t meucliente
-5.rodar o container: $ docker run --network microservices -e VAR_MEUSERVICO_HOST=meuservicoDns meucliente
-	onde: --network microservices > identificar a network
-	      -e VAR_MEUSERVICO_HOST=meuservicoDns > passar o endereço do outro microserviço onde vamos conectar
-	      meucliente > nome da imagem que vamos rodar, eu acho
-
-# Commit: adicionando docker compose
-
-Só adicionando o arquivo e a instrução de como executá-lo.
- -novo arquivo: docker-compose.yaml
-Instruções de uso:
- $ docker-compose up       [só pra subir tudo, sem recriar imagens]
- $ docker-compose build    [pra criar ou recriar as imagens]
-
-# Commit: bootstrapping e cloud-init
-
-Este commit adiciona:
- ./cloud_init.yaml > script de bootstrapping com instruções de uso. 
-
-# Commit: testando um microserviço por dentro
-
-Este commit adiciona:
- ./meuservico/autoteste.py > arquivo que testa o microserviço
-
-Instruções:
- $ docker-compose up                                                   [só pra subir tudo]
- $ docker exec -it examplemicroservice_meuservicoDns_1  /bin/bash      [entrar no container]
- $ python3 autoteste.py                                                [testar o container de dentro]
- $ cat log.txt                                                         [ver o resultado do teste]
-
+ -apt-get update, upgrade  
+ -git clone https://github.com/jrkessl/exampleMicroservice  
+ -instalar docker  
+ -configurar docker pra rodar sem sudo  
+ -nano $HOME/.nanorc  
+ -executar os steps pra dar build e run no microserviço "meuserviço":  
+  $ docker network create microservices  
+  $ docker build . -f meuservico/Dockerfile -t meuservico  
+  $ docker run -p 127.0.0.1:50051:50051/tcp --network microservices --name meuservicoDns meuservico &  
+1.criar arquivo de execução: meucliente/meucliente.py  
+2.criar arquivo Dockerfile  
+3.criar arquivo requirements.txt  
+4.build: $ docker build . -f meucliente/Dockerfile -t meucliente  
+5.rodar o container: $ docker run --network microservices -e VAR_MEUSERVICO_HOST=meuservicoDns meucliente  
+	onde: --network microservices > identificar a network  
+	      -e VAR_MEUSERVICO_HOST=meuservicoDns > passar o endereço do outro microserviço onde vamos conectar  
+	      meucliente > nome da imagem que vamos rodar, eu acho  
+  
+# Commit: adicionando docker compose  
+  
+Só adicionando o arquivo e a instrução de como executá-lo.  
+ -novo arquivo: docker-compose.yaml  
+Instruções de uso:  
+ $ docker-compose up       [só pra subir tudo, sem recriar imagens]  
+ $ docker-compose build    [pra criar ou recriar as imagens]  
+  
+# Commit: bootstrapping e cloud-init  
+  
+Este commit adiciona:  
+ ./cloud_init.yaml > script de bootstrapping com instruções de uso.   
+  
+# Commit: testando um microserviço por dentro  
+  
+Este commit adiciona:  
+ ./meuservico/autoteste.py > arquivo que testa o microserviço  
+  
+Instruções:  
+ $ docker-compose up                                                   [só pra subir tudo]  
+ $ docker exec -it examplemicroservice_meuservicoDns_1  /bin/bash      [entrar no container]  
+ $ python3 autoteste.py                                                [testar o container de dentro]  
+ $ cat log.txt                                                         [ver o resultado do teste]  
+  
 # Commit: adicionando pytest para testar microservicos dentro dos seus containeres
 
 Como funciona:
