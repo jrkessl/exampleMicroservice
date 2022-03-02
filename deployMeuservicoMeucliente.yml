@@ -1,0 +1,61 @@
+# this file deploys in kubernetes a meuServico container, a meuServico ClusterIP so it's reachable, 
+# and a meuCliente container that talks to the meuServico container. It tests intra-cluster container
+# communication using declarative Kubernetes.
+# tested with microk8s.
+# usage: 
+# microk8s.kubectl apply -f deployMeuservicoMeucliente.yml      # to deploy
+# microk8s.kubectl get all                                      # to check the names of the created PODs
+# microk8s.kubectl logs pod/<name of the meucliente POD>        # to check the output of meuCliente and see it working
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meuservico
+spec:
+  selector: 
+    matchLabels: 
+      app: meuservico
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: meuservico
+    spec:
+      containers:
+        - image: jrkessl/meuservico:latest
+          name: vs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: meuservico-cip
+spec:
+  type: ClusterIP
+  ports: 
+    - port: 50051
+  selector: 
+    app: meuservico
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meucliente
+spec:
+  selector:
+    matchLabels:
+      app: meucliente
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: meucliente
+    spec:
+      containers:
+        - image: jrkessl/meucliente:latest
+          name: meucliente
+          env:
+            - name: VAR_MEUSERVICO_HOST
+              value: meuservico-cip
+#          ports:
+#            - containerPort: 5000

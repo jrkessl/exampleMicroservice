@@ -5,38 +5,26 @@ Started in September 2021
 Exercised developed from tutorial:
 https://realpython.com/python-microservices-grpc/#example-implementation
 
-The first commit: 5ea9211e08595767cfd37c9583893d6874af2fd0
-Is just a microservice "meuservico".
-
-The second commit: 5c413c6907f6b3db69d918b7c3ade5e83b73b963
-Adds a Flask web page that calls "meuservico" and displays results in the web page.
-
-Instrucoes de como fazer funcionar esse projeto. 
-
-Artigo de origem: 
-https://realpython.com/python-microservices-grpc/#example-implementation
-
 # Commit: (primeiro commit) Instrucao para o microservico "meuservico"
 
-'********************* instrução 1/2: como fazer funcionar do zero **********************
+## instrução 1/2: como fazer funcionar do zero 
 
 1. criar arquivo /protobufs/<nome do servico>.proto // Define a API do serviço.
 2. criar arquivo <nome do servico>/requirements.txt 
-3. criar, ativar e configurar o ambiente virtual: 
-python3 -m venv venv0
-source venv0/bin/activate  
-    (o comando acima é na pasta do projeto)
-cd <nome do servico>
-python -m pip install -r requirements.txt
+3. criar, ativar e configurar o ambiente virtual:   
+`python3 -m venv venv0`  
+`source venv0/bin/activate`  (este comando é na pasta do projeto)  
+`cd <nome do servico>`  
+`python -m pip install -r requirements.txt`
 
-4. gerar o código python:
-python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/<nome do servico>.proto
+4. gerar o código python:  
+`python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/<nome do servico>.proto`
 
 5. criar o arquivo cliente cliente.py
 6. criar o arquivo servidor <nome do servico>.py
-7. rodar o servidor: python3 <nome do servico>.py (lembrar de estar com o ambiente virtual ativado) e, em outra janela, rodar o cliente.
+7. rodar o servidor: `python3 <nome do servico>.py` (lembrar de estar com o ambiente virtual ativado) e, em outra janela, rodar o cliente.
 
-'********************* instrução 2/2: como fazer funcionar o projeto baixado do github *******************
+## instrução 2/2: como fazer funcionar o projeto baixado do github 
 
 1. baixar o projeto (com git clone)
 2. cd exampleMicroservice
@@ -50,56 +38,55 @@ python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. .
 
 # Commit: (segundo commit) Instrucao para a pagina web com Flask 
 
-'********************* instrução 1/2: como fazer funcionar do zero **********************
+## instrução 1/2: como fazer funcionar do zero 
 
-0. fazer git clone deste commit:
+0. fazer git clone deste commit:  
 https://devopscube.com/checkout-clone-specific-git-commit-id-sha/
 1. crie a pasta "servidorweb" na raiz do projeto
 2. crie o arquivo "servidorweb\requirements.txt"; o conteudo do arquivo esta no arquivo homonimo no Repositorio no Github;
-3. habilitar o ambiente virtual. Na pasta do projeto (exampleMicroservices):
- $ sudo apt-get update
- $ sudo apt-get upgrade
- $ sudo apt install python3.8-venv
- $ python3 -m venv venv0
- $ source venv0/bin/activate
-4. instale os requerimentos:
- $ python -m pip install -r servidorweb/requirements.txt
+3. habilitar o ambiente virtual. Na pasta do projeto (exampleMicroservices):  
+`sudo apt-get update`  
+`sudo apt-get upgrade`  
+`sudo apt install python3.8-venv`  
+`python3 -m venv venv0`  
+`source venv0/bin/activate`  
+4. instale os requerimentos:  
+`python -m pip install -r servidorweb/requirements.txt`  
 5. crie o arquivo servidorweb/servidorweb.py; o conteudo do arquivo esta no Repo;
 6. crie o arquivo servidorweb/templates/homepage.html; o conteudo do arquivo esta no Repo;
-7. gere o codigo do meuservido na pasta do servidorweb (exampleMicroservices/servidorweb):
- $ python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/meuservico.proto
-8. rode o meuservico em outra janela. Em outra janela, faça:
- $ cd exampleMicroservice
- $ source venv0/bin/activate
- $ cd meuservico/
- $ python meuservico.py
-9. (de volta na janela anterior) rode a aplicacao Flask:
- $ FLASK_APP=servidorweb.py flask run
-10. teste (em uma terceira janela):
- $ curl http://127.0.0.1:5000/
-11. Vai dar pau pois neste commit em particular o meuservico está ouvindo na porta 50051 mas o servidorweb está buscando na porta 50052. Corrija 
-    isso na linha 17 do arquivo servidorweb.py e linha 51 do meuservico.py: de 50052 para 50051.
+7. gere o codigo do meuservido na pasta do servidorweb (exampleMicroservices/servidorweb):  
+`python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/meuservico.proto`
+8. rode o meuservico em outra janela. Em outra janela, faça:  
+`cd exampleMicroservice`  
+`source venv0/bin/activate`  
+`cd meuservico/`  
+`python meuservico.py`  
+9. (de volta na janela anterior) rode a aplicacao Flask:  
+`FLASK_APP=servidorweb.py flask run`  
+10. teste (em uma terceira janela):  
+`curl http://127.0.0.1:5000/`  
+11. Vai dar pau pois neste commit em particular o meuservico está ouvindo na porta 50051 mas o servidorweb está buscando na porta 50052. Corrija isso na linha 17 do arquivo servidorweb.py e linha 51 do meuservico.py: de 50052 para 50051.
 
-'********************* instrução 2/2: como fazer funcionar o projeto baixado do github *******************
+## instrução 2/2: como fazer funcionar o projeto baixado do github 
 
-1. git clone https://github.com/jrkessl/exampleMicroservice
-2. cd exampleMicroservice
-3. instalar e habilitar ambiente virtual:
- $ sudo apt-get update
- $ sudo apt-get upgrade
- $ sudo apt install python3.8-venv
- $ python3 -m venv venv0
- $ source venv0/bin/activate
+1. `git clone https://github.com/jrkessl/exampleMicroservice`  
+2. `cd exampleMicroservice`  
+3. instalar e habilitar ambiente virtual:  
+`sudo apt-get update`  
+`sudo apt-get upgrade`  
+`sudo apt install python3.8-venv`  
+`python3 -m venv venv0`  
+`source venv0/bin/activate`  
 4. python -m pip install -r servidorweb/requirements.txt
-5. rodar o meuserviço:
- $ cd meuservico/
- $ python meuservico.py
-6. rodar o servidorweb. Em outro terminal: 
- $ cd exampleMicroservice/
- $ source venv0/bin/activate
- $ cd servidorweb/
- $ FLASK_APP=servidorweb.py flask run
-7. testar o servidor web. Em outro terminal: $ curl http://127.0.0.1:5000
+5. rodar o meuserviço:  
+`cd meuservico/`  
+`python meuservico.py`  
+6. rodar o servidorweb. Em outro terminal:   
+`cd exampleMicroservice/`  
+`source venv0/bin/activate`  
+`cd servidorweb/`  
+`FLASK_APP=servidorweb.py flask run`  
+7. testar o servidor web. Em outro terminal: `curl http://127.0.0.1:5000`
  
 # Commit: (terceiro commit) Instrucao para dockerizar os serviços 
 
@@ -283,3 +270,6 @@ Steps:
 5. Rodar
  - docker run -p 127.0.0.1:5000:5000/tcp --network microservices -e VAR_MEUSERVICO_HOST=meuservicoDns 465271007900.dkr.ecr.sa-east-1.amazonaws.com/servidorweb
  - docker run -p 127.0.0.1:50051:50051/tcp --network microservices --name meuservicoDns 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meuservico
+
+# Commit: adding declarative kubernetes yaml file to deploy these containers in Kubernetes, instead of Docker Swarm  
+Just check files deployMeuservicoMeucliente.yml and deployMeuservicoServidorweb.yml. It's all there.
