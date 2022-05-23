@@ -87,7 +87,7 @@ runcmd:
  - [ sh, -c, echo "space on root folder:" ] 
  - [ sh, -c, df -h / ] 
  - [ sh, -c, echo "testing microk8s:" ] 
- - [ sh, -c, microk8s.kubectl version ] 
+ - [ sh, -c, microk8s.kubectl version --short ] 
 # - [ sh, -c, comando ] 
 
 
