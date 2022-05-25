@@ -5,6 +5,10 @@ Started in September 2021
 Exercised developed from tutorial:
 https://realpython.com/python-microservices-grpc/#example-implementation
 
+Github Image descriptions:
+ - jrkessl/servidorweb:1.0 - The first version. Worked until soft_unicode was deprecated and removed from Python library markupsafe.
+ - jrkessl/servidorweb:1.1 - Fixes the previous' version bug by using the latest version of Flask Python library.
+
 # Commit: (primeiro commit) Instrucao para o microservico "meuservico"
 
 ## instrução 1/2: como fazer funcionar do zero 
