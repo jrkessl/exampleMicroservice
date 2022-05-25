@@ -42,14 +42,14 @@ runcmd:
 # - unzip awscliv2.zip
 # - sudo ./aws/install
 
- - [ sh, -c, echo "=========instalar microk8s (version 1.17)=========" ] 
- - sudo snap install microk8s --channel=1.17/stable --classic
+ - [ sh, -c, echo "=========instalar microk8s (último)=========" ] 
+ - sudo snap install microk8s --channel=latest/stable --classic
  - sudo usermod -a -G microk8s ubuntu
+ - echo "alias k=microk8s.kubectl" >> /home/ubuntu/.bashrc
  - microk8s enable dashboard dns registry istio
 
 # daqui pra frente são os comandos úteis para instalar e fazer funcionar interface gráfica, 
 # navegador e minikube.
-
 
  # - [ sh, -c, echo "=========instalar x2go=========" ] 
  # - sudo apt-add-repository ppa:x2go/stable
