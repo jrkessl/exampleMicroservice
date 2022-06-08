@@ -102,6 +102,9 @@ final_message: "The system is finally up, after $UPTIME seconds"
 # /var/log/cloud-init.log: very detailed log with debugging output, detailing each action taken
 # /run/cloud-init: contains logs about how cloud-init decided to enable or disable itself, as well as what platforms/datasources were detected. These logs are most useful when trying to determine what cloud-init ran or did not run.
 
+# if on ec2, you can check which user-data the instance received with:
+# sudo cat /var/lib/cloud/instance/user-data.txt
+
 #como lançar a instância com bootstrapping:
 #multipass launch --name w1   --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
 #multipass launch --name w2 --cloud-init ./cloud-init-docker.yml --cpus 1 --mem 1G --disk 10G
