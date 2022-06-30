@@ -1,3 +1,4 @@
+#cloud-config
 package_update: true
 package_upgrade: true
 
@@ -9,8 +10,8 @@ apt:
 
 packages:
   - docker-ce
-  - docker-ce-cli
-  - python3.8-venv
+  # - docker-ce-cli
+  - python3-venv
   - python3-pip
 
 runcmd:
