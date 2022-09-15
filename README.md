@@ -295,4 +295,14 @@ Steps:
  - docker run -p 127.0.0.1:50051:50051/tcp --network microservices --name meuservicoDns 465271007900.dkr.ecr.sa-east-1.amazonaws.com/meuservico
 
 # Commit: adding declarative kubernetes yaml file to deploy these containers in Kubernetes, instead of Docker Swarm  
-Just check files deployMeuservicoMeucliente.yml and deployMeuservicoServidorweb.yml. It's all there.
+Just check files deployMeuservicoMeucliente.yml and deployMeuservicoServidorweb.yml. It's all there.  
+
+# Commit (feature added): helm  
+Added a simple local helm chart, that deploys these services to the cluster using Helm.  
+Usage:  considering the name of the helm release will be `meus`, go to the project's rool folder and do:  
+`helm install meus helm/exampleMicroservice/`  
+or:  
+`helm upgrade --install meus helm/exampleMicroservice/`  
+  
+Change values in values.yaml file. Or, to set a value in the command line:  
+`helm upgrade --install meus2 --set meuservico.tag=1.0 helm/exampleMicroservice/`  
