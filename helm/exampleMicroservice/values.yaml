@@ -6,6 +6,7 @@
 meuservico:
   tag: latest
 
+# namespace: qa
 # replicaCount: 1
 
 # image:

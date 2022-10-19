@@ -306,3 +306,10 @@ or:
   
 Change values in values.yaml file. Or, to set a value in the command line:  
 `helm upgrade --install meus2 --set meuservico.tag=1.0 helm/exampleMicroservice/`  
+  
+# Commit (feature added): ingress object helm  
+Changes:  
+ - Added an ingress object, replacing the load balancer service.  
+ - Namespace is now defined in the helm values file (helm/exampleMicroservice/values.yaml)  
+ - Installation: `helm upgrade --install meus ./helm/exampleMicroservice/ -n qa`
+

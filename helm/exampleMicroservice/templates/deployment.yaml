@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: meuservico
+  # namespace: {{ .Values.namespace }}
 spec:
   selector: 
     matchLabels: 
@@ -20,6 +21,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: servidorweb
+  # namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
