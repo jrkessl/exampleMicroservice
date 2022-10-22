@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meuservico
+spec:
+  selector: 
+    matchLabels: 
+      app: meuservico
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: meuservico
+    spec:
+      containers:
+        - image: jrkessl/meuservico:{{ .Values.meuservico.tag }}
+          name: vs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servidorweb
+spec:
+  selector:
+    matchLabels:
+      app: servidorweb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: servidorweb
+    spec:
+      containers:
+        - image: jrkessl/servidorweb:latest
+          name: servidorweb
+          env:
+            - name: VAR_MEUSERVICO_HOST
+              value: meuservico-cip
+          ports:
+            - containerPort: 5000

@@ -302,7 +302,16 @@ Added a simple local helm chart, that deploys these services to the cluster usin
 Usage:  considering the name of the helm release will be `meus`, go to the project's rool folder and do:  
 `helm install meus helm/exampleMicroservice/`  
 or:  
-`helm upgrade --install meus helm/exampleMicroservice/`  
+`helm upgrade --install -n qa meus helm/exampleMicroservice/`  
   
 Change values in values.yaml file. Or, to set a value in the command line:  
-`helm upgrade --install meus2 --set meuservico.tag=1.0 helm/exampleMicroservice/`  
+`helm upgrade --install -n qa meus --set meuservico.tag=1.0 helm/exampleMicroservice/`  
+  
+# Commit (feature added): helm chart with ingress object, alb class  
+Added a new helm chart that replaces the load balancer with an ingress object, class 'alb' (the AWS ingress controller). This is a new helm chart and the other one is still available. Install this chart with:  
+`helm upgrade --install -n qa examic helm/exampleMicroservice-ingress-alb/`  
+Delete with:  
+`helm delete -n qa examic`  
+Important: The host value(s) defined in the rules section of ingress definition file need DNS records created for them, before this complete solution works. They do not get automatically created. For those host value(s) you need to do either one of:  
+ 1. Choose host values in a domain you own, and where your DNS zone is hosted (Route 53?) create CNAME records for them, pointing to the address of the load balancer that will get created in AWS;
+ 2. After the load balancer gets created, resolve its address, get one of the IPs it will have at the time, and create aliases between that IP and the host values from ingress.yaml in your /etc/hosts file.  
