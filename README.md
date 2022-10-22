@@ -315,3 +315,15 @@ Delete with:
 Important: The host value(s) defined in the rules section of ingress definition file need DNS records created for them, before this complete solution works. They do not get automatically created. For those host value(s) you need to do either one of:  
  1. Choose host values in a domain you own, and where your DNS zone is hosted (Route 53?) create CNAME records for them, pointing to the address of the load balancer that will get created in AWS;
  2. After the load balancer gets created, resolve its address, get one of the IPs it will have at the time, and create aliases between that IP and the host values from ingress.yaml in your /etc/hosts file.  
+   
+# Commit (feature added): helm chart with ingress object, nginx class
+For the Helm chart that installs an ingress object, created another helm chart, but this one installs an Nginx ingress controller.   
+To install the Nginx ingress controller. Visit https://kubernetes.github.io/ingress-nginx/deploy/#quick-start or just:  
+`helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx`  
+`helm repo update`  
+`helm install ingress-nginx ingress-nginx/ingress-nginx`  
+  
+Install this chart with:  
+`helm upgrade --install -n qa2 examic-nginx helm/exampleMicroservice-ingress-nginx/`  
+then later:  
+`helm delete -n qa2 examic-nginx`  

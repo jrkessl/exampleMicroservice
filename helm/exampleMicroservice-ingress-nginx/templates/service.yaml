@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: meuservico-cip
+  # namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  ports: 
+    - port: 50051
+  selector: 
+    app: meuservico
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: servidorweb-np
+  # namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  ports: 
+    - port: 5000
+  selector: 
+    app: servidorweb    
