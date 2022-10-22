@@ -5,7 +5,7 @@ metadata:
   # namespace: {{ .Values.namespace }}
   annotations:
     kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     # alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     #alb.ingress.kubernetes.io/certificate-arn:  arn:aws:acm:us-east-2:xxxxxxxxxxxxx:certificate/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -21,17 +21,19 @@ metadata:
     type: ingress
 spec:
   rules:
-  - host: examplemicroservice-path.gtldev.net
-    http:
-      paths:
-      - path: /somepath
-        pathType: Prefix
-        backend:
-          service:
-            name: servidorweb-np
-            port:
-              number: 5000
-  - host: examplemicroservice.gtldev.net 
+  # - host: examplemicroservice.example.com
+  #   http:
+  #     paths:
+  #     - path: /somepath
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: servidorweb-np
+  #           port:
+  #             number: 5000
+  # This rule does not work because AWS ingress does not support URL path rewriting (at least as of now, Oct 2022), and exampleMicroservices application only responds in the root path '/'.
+  # https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/835
+  - host: examplemicroservice.example.com
     http:
       paths:
       - path: /
@@ -41,18 +43,3 @@ spec:
             name: servidorweb-np
             port:
               number: 5000
-  - host: examplemicroservice.gtldev.net 
-    http:
-      paths:
-      - path: /thispath
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: servidorweb-np
-            port:
-              number: 5000
-#examplemicroservice-path.gtldev.net/somepath
-#examplemicroservice.gtldev.net/thispath
-
-#problema:
-#path-based rule não está funcionando. 
