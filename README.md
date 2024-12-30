@@ -1,3 +1,27 @@
+# Probe tester
+## Run the server 
+
+1. Activate, and configure the virtual environment. In the project's root folder, run:  
+
+`source venv0/bin/activate`
+`python -m pip install -r meuservico/requirements.txt`
+
+2. Generate the python code:  
+`python -m grpc_tools.protoc -I ./protobufs --python_out=. --grpc_python_out=. ./protobufs/meuservico.proto`
+
+3. Run the server: `python3 meuservico/meuservico.py` (remember the virtual environment must be active) and, in another window, run the client. 
+
+## Run the client
+
+1. Open another shell session. You should be at the project's root folder. Go back to it, if you aren't. 
+2. `source venv0/bin/activate`
+3. Run the client: `python3 meuservico/cliente.py` 
+
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+
+
 # exampleMicroservice
 Just a sample implementation of a microservice using Google RPC in Python.
 Started in September 2021
