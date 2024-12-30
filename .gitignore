@@ -1,0 +1,4 @@
+meuservico/__pycache__/
+meuservico/meuservico_pb2.py
+meuservico/meuservico_pb2_grpc.py
+venv0/
