@@ -1,21 +1,19 @@
 # Probe tester
 ## Run the server 
 
-1. Activate, and configure the virtual environment. In the project's root folder, run:  
-
-`source venv0/bin/activate`
-`python -m pip install -r meuservico/requirements.txt`
-
-2. Generate the python code:  
-`python -m grpc_tools.protoc -I ./protobufs --python_out=. --grpc_python_out=. ./protobufs/meuservico.proto`
-
-3. Run the server: `python3 meuservico/meuservico.py` (remember the virtual environment must be active) and, in another window, run the client. 
+```
+source venv0/bin/activate
+python -m pip install -r meuservico/requirements.txt
+python -m grpc_tools.protoc -I ./protobufs --python_out=./meuservico/ --grpc_python_out=./meuservico/ ./protobufs/meuservico.proto
+python3 meuservico/meuservico.py
+```
 
 ## Run the client
 
-1. Open another shell session. You should be at the project's root folder. Go back to it, if you aren't. 
-2. `source venv0/bin/activate`
-3. Run the client: `python3 meuservico/cliente.py` 
+```
+source venv0/bin/activate
+python3 meuservico/cliente.py
+```
 
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
